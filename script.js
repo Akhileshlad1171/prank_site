@@ -1,32 +1,29 @@
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
-const response = document.getElementById("response");
-const question = document.getElementById("question");
+const buttons = document.getElementById("buttons");
+const result = document.getElementById("result");
 
-// slow movement settings
+// ---- NO button movement (medium speed) ----
 let posX = 0;
 let posY = 0;
 
-const MOVE_DISTANCE = 200;   // small movement
-const ANIMATION_TIME = 200; // slow animation (ms)
+const MOVE_DISTANCE = 250;
+const ANIMATION_TIME = 250;
 
 noBtn.style.transition = `transform ${ANIMATION_TIME}ms ease`;
 
-// desktop
-noBtn.addEventListener("mouseenter", moveButton);
-// mobile
-noBtn.addEventListener("touchstart", moveButton);
+noBtn.addEventListener("mouseenter", moveNo);
+noBtn.addEventListener("touchstart", moveNo);
 
-function moveButton() {
+function moveNo() {
   const dx = (Math.random() - 0.5) * MOVE_DISTANCE;
   const dy = (Math.random() - 0.5) * MOVE_DISTANCE;
 
   posX += dx;
   posY += dy;
 
-  // keep inside screen
-  const maxX = window.innerWidth / 2 - 80;
-  const maxY = window.innerHeight / 2 - 40;
+  const maxX = window.innerWidth / 2 - 100;
+  const maxY = window.innerHeight / 2 - 60;
 
   posX = Math.max(-maxX, Math.min(maxX, posX));
   posY = Math.max(-maxY, Math.min(maxY, posY));
@@ -34,34 +31,29 @@ function moveButton() {
   noBtn.style.transform = `translate(${posX}px, ${posY}px)`;
 }
 
-// YES button magic 💖
+// ---- YES button action 💖 ----
 yesBtn.addEventListener("click", () => {
-  question.style.display = "none";
-  noBtn.style.display = "none";
-  yesBtn.style.display = "none";
+  buttons.style.display = "none";   // hide buttons
+  result.style.display = "block";   // show text + image
 
-  response.style.display = "block";
-  response.innerText = "Yes… I knew it 😌💖";
-
-  for (let i = 0; i < 30; i++) {
-    createHeart();
+  // hearts burst
+  for (let i = 0; i < 40; i++) {
+    setTimeout(createHeart, i * 80);
   }
 });
 
 function createHeart() {
   const heart = document.createElement("div");
+  heart.className = "heart";
   heart.innerText = "💖";
-  heart.style.position = "fixed";
+
   heart.style.left = Math.random() * window.innerWidth + "px";
   heart.style.top = window.innerHeight + "px";
-  heart.style.fontSize = "2rem";
-  heart.style.animation = "floatUp 3s linear forwards";
+
   document.body.appendChild(heart);
 
   setTimeout(() => heart.remove(), 3000);
 }
-
-
 
 
 
