@@ -33,14 +33,14 @@ button {
 #yesBtn {
   background: #ff4d6d;
   color: white;
-  margin-right: 20px;
+
 }
 
 #noBtn {
   background: #444;
   color: white;
   position: absolute;
-  left: 140px;
+ 
 }
 
 .result {
@@ -74,4 +74,5 @@ button {
     opacity: 0;
   }
 }
+
 
