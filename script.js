@@ -1,32 +1,30 @@
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
+const response = document.getElementById("response");
+const question = document.getElementById("question");
 
-// initial position
+// slow movement settings
 let posX = 0;
 let posY = 0;
 
-// limit movement
-const MOVE_DISTANCE = 120; // px
-const ANIMATION_TIME = 250; // ms
+const MOVE_DISTANCE = 70;   // small movement
+const ANIMATION_TIME = 600; // slow animation (ms)
 
-// Apply smooth transition
-noBtn.style.transition = `transform ${ANIMATION_TIME}ms ease-out`;
+noBtn.style.transition = `transform ${ANIMATION_TIME}ms ease`;
 
-// Desktop: hover
+// desktop
 noBtn.addEventListener("mouseenter", moveButton);
-
-// Mobile: touch
+// mobile
 noBtn.addEventListener("touchstart", moveButton);
 
 function moveButton() {
-  // random direction but limited distance
   const dx = (Math.random() - 0.5) * MOVE_DISTANCE;
   const dy = (Math.random() - 0.5) * MOVE_DISTANCE;
 
   posX += dx;
   posY += dy;
 
-  // screen boundaries
+  // keep inside screen
   const maxX = window.innerWidth / 2 - 80;
   const maxY = window.innerHeight / 2 - 40;
 
@@ -36,9 +34,16 @@ function moveButton() {
   noBtn.style.transform = `translate(${posX}px, ${posY}px)`;
 }
 
-// YES click stays same
+// YES button magic 💖
 yesBtn.addEventListener("click", () => {
-  for (let i = 0; i < 25; i++) {
+  question.style.display = "none";
+  noBtn.style.display = "none";
+  yesBtn.style.display = "none";
+
+  response.style.display = "block";
+  response.innerText = "Yes… I knew it 😌💖";
+
+  for (let i = 0; i < 30; i++) {
     createHeart();
   }
 });
@@ -55,4 +60,6 @@ function createHeart() {
 
   setTimeout(() => heart.remove(), 3000);
 }
+
+
 
