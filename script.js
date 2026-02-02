@@ -7,8 +7,8 @@ const question = document.getElementById("question");
 let posX = 0;
 let posY = 0;
 
-const MOVE_DISTANCE = 70;   // small movement
-const ANIMATION_TIME = 600; // slow animation (ms)
+const MOVE_DISTANCE = 120;   // small movement
+const ANIMATION_TIME = 400; // slow animation (ms)
 
 noBtn.style.transition = `transform ${ANIMATION_TIME}ms ease`;
 
@@ -60,6 +60,7 @@ function createHeart() {
 
   setTimeout(() => heart.remove(), 3000);
 }
+
 
 
 
